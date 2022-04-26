@@ -1,0 +1,23 @@
+# SIT210-Task3.1P-WebHook
+// This #include statement was automatically added by the Particle IDE.
+#include <Adafruit_DHT.h>
+DHT dht(A0, DHT11);
+
+int LED = D7;
+// int photodiode = A0;
+void setup() {
+
+    pinMode(LED, OUTPUT);
+    dht.begin();
+}
+
+void loop() {
+    digitalWrite(LED, HIGH);// this code represents the turn on of the LED bulb
+    
+    float temp = dht.getTempCelcius();
+    Particle.publish("temp", String(temp), PRIVATE);
+    delay(30000);
+    
+    digitalWrite(LED,LOW);
+    delay(30000);
+}
